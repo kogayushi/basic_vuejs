@@ -14,6 +14,7 @@
     <p>{{items[2].name}}： {{items[2].price}} x {{items[2].quantity}}</p>
     <p>小計：{{totalPrice | numberWithDelimiter}}</p>
     <p>合計（税込）：{{totalPriceWithTax | numberWithDelimiter}}</p>
+    <p v-show="!canBuy">{{ 1000 | numberWithDelimiter }}円以上からご購入頂けます</p>
 </div>
 <script>
     var items = [
@@ -54,6 +55,9 @@
             },
             totalPriceWithTax: function () {
                 return Math.floor(this.totalPrice * 1.08)
+            },
+            canBuy: function() {
+                return this.totalPrice >= 1000
             }
         }
     });
