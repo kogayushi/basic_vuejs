@@ -52,10 +52,8 @@ describe('KbnButton', () => {
 
       describe('false', () => {
         it('disabled属性が付与されていないこと', () => {
-          const button = mount(KbnButton, {
-            propsData: {disabled: true}
-          })
-          expect(button.attributes().disabled).to.be.an('undefiend')
+          const button = mount(KbnButton)
+          expect(button.attributes().disabled).to.be.an('undefined')
         })
       })
     })
