@@ -51,7 +51,7 @@
 </template>
 
 <script>
-import KbnButton from '@/components/atoms/KbnButton'
+import KbnButton from '@/components/atoms/KbnButton.vue'
 
 const REGEX_EMAIL = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 const required = val => !!val.trim()
@@ -86,7 +86,9 @@ export default {
           required: required(this.email),
           format: REGEX_EMAIL.test(this.email)
         },
-        password: required(this.password)
+        password: {
+          required: required(this.password)
+        }
       }
     },
 
@@ -106,31 +108,31 @@ export default {
 
     disableLoginAction () {
       return !this.valid || this.progress
+    }
+  },
+
+  methods: {
+    resetError () {
+      this.error = ''
     },
 
-    methods: {
-      resetError () {
-        this.error = ''
-      },
-
-      handleClick (ev) {
-        if (this.disableLoginAction) {
-          return
-        }
-
-        this.progress = true
-        this.error = ''
-
-        this.$nextTick(() => {
-          this.onlogin({email: this.email, password: this.password})
-            .catch(err => {
-              this.error = err.message
-            })
-            .then(() => {
-              this.progress = false
-            })
-        })
+    handleClick (ev) {
+      if (this.disableLoginAction) {
+        return
       }
+
+      this.progress = true
+      this.error = ''
+
+      this.$nextTick(() => {
+        this.onlogin({email: this.email, password: this.password})
+          .catch(err => {
+            this.error = err.message
+          })
+          .then(() => {
+            this.progress = false
+          })
+      })
     }
   }
 }
