@@ -1,6 +1,6 @@
 <template>
   <div class="login-view">
-    <h1>Kanban App</h1>
+    <h1>Kanban Ap</h1>
     <KbnLoginForm :onlogin="handleLogin"/>
   </div>
 </template>
@@ -21,13 +21,12 @@ export default {
         .then(() => {
           this.$router.push({path: '/'})
         })
-        .catch(err => {
-          this.throwReject(err)
-        })
+        .catch(err => this.throwReject(err))
     },
     throwReject (err) {
       return Promise.reject(err)
     }
+
   }
 }
 </script>
