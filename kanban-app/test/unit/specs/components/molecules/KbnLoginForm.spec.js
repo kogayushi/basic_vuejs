@@ -149,6 +149,7 @@ describe('KbnLoginForm', () => {
       let loginForm
       let onloginStub
       beforeEach(done => {
+        onloginStub = sinon.stub()
         loginForm = mount(KbnLoginForm, {
           propsData: {onlogin: onloginStub}
         })
